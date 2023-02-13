@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { getEvents } from "../../managers/EventManager"
+import "./event.css"
 
 export const EventList = (props) => {
     const [ events, setEvents ] = useState([])
+
+    useEffect(() => {
+        getEvents().then(data => setEvents(data))
+    }, [])
 
     useEffect(() => {
         getEvents().then(data => setEvents(data))
@@ -13,9 +18,15 @@ export const EventList = (props) => {
             {
                 events.map(event => {
                     return <section key={`event--${event.id}`} className="event">
-                        <div className="event__title">{event.title} by {event.maker}</div>
-                        <div className="event__players">{event.number_of_players} players needed</div>
-                        <div className="event__skillLevel">Skill level is {event.skill_level}</div>
+                        
+                        <div className="event__details">Details:  {event.details}</div>
+                        {/* <div className="event__game"> {event.game} Event</div> */}
+                        {/* <div className="event__organizer">{event.title} organized by {event.organizing_gamer}</div> */}
+                        <div className="event__location"> Location: {event.location} </div>
+                        <div className="event__date"> Date: {event.date} </div>
+                        <div className="event__time"> Time: {event.start_time} - {event.end_time}</div>
+                        
+                        
                     </section>
                 })
             }

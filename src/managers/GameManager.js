@@ -6,3 +6,13 @@ export const getGames = () => {
     })
         .then(response => response.json())
 }
+
+export const createGame = (game) => {
+    return fetch("", { })
+        .then()
+}
+
+export const getGameTypes = () => {
+    return fetch("", { })
+        .then()
+}
