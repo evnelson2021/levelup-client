@@ -6,7 +6,7 @@ import { getGames } from '../../managers/GameManager.js'
 
 export const EventForm = () => {
     const navigate = useNavigate()
-    const [game, setGame] = useState([])
+    const [games, setGames] = useState([])
 
     /*
         Since the input fields are bound to the values of
@@ -19,15 +19,13 @@ export const EventForm = () => {
         date: "",
         start_time: "",
         end_time: "",
-        details: "",
-        attendees: 0
+        details: ""
     })
 
-
-    // useEffect(() => {
-    //     // TODO: Get the game types, then set the state
-    //     getGameTypes().then(data => setGameTypes(data))
-    // }, [])
+    useEffect(() => {
+        // TODO: Get the game types, then set the state
+        getGames().then(data => setGames(data))
+    }, [])
 
     const changeEventState = (domEvent) => {
         // TODO: Complete the onChange function
@@ -41,29 +39,44 @@ export const EventForm = () => {
             <h2 className="eventForm__title">Register New Event</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="game">Game: </label>
-                    <input type="text" name="game" required autoFocus className="form-control"
-                        value={currentEvent.game}
-                        onChange={changeEventState}
-                    />
+                    <label className="label">Game: </label>
+                        <select
+                                name="game"
+                                className="form-control"
+                                value={currentEvent.game}
+                                onChange={(event) => {
+                                    const copy = { ...currentEvent }
+                                    copy.game = parseInt(event.target.value)
+                                    setCurrentEvent(copy)
+                                }}>
+                                <option value="0">Please Choose Game</option>
+                                {games.map(game => ( 
+                                            <option key={`game--${game.id}`} value={game.id} name={game.name}>{game.name}</option>                         
+                                    ))}
+                        </select>
                     <label htmlFor="location">Location: </label>
                     <input type="text" name="location" required autoFocus className="form-control"
                         value={currentEvent.location}
                         onChange={changeEventState}
                     />
                     <label htmlFor="date">Date: </label>
-                    <input type="text" name="date" required autoFocus className="form-control"
+                    <input type="date" name="date" required autoFocus className="form-control"
                         value={currentEvent.date}
                         onChange={changeEventState}
                     />
                     <label htmlFor="start_time">Start: </label>
-                    <input type="text" name="start_time" required autoFocus className="form-control"
+                    <input type="time" name="start_time" required autoFocus className="form-control"
                         value={currentEvent.start_time}
                         onChange={changeEventState}
                     />
                     <label htmlFor="end_time">End: </label>
-                    <input type="text" name="end_time" required autoFocus className="form-control"
+                    <input type="time" name="end_time" required autoFocus className="form-control"
                         value={currentEvent.length}
+                        onChange={changeEventState}
+                    />
+                    <label htmlFor="details">Details: </label>
+                    <input type="text" name="details" required autoFocus className="form-control"
+                        value={currentEvent.details}
                         onChange={changeEventState}
                     />
                 </div>
@@ -78,7 +91,7 @@ export const EventForm = () => {
 
                     const event = {
                         organizing_gamer: currentEvent.organizing_gamer,
-                        game: parseInt(currentEvent.game),
+                        game: (currentEvent.game),
                         location: (currentEvent.location),
                         date: (currentEvent.date),
                         start_time: (currentEvent.start_time),
