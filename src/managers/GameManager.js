@@ -16,6 +16,7 @@ export const createGame = (game) => {
         },
         body: JSON.stringify(game)
     })
+        // .then(response => response.json())
 }
 
 export const getGameTypes = () => {

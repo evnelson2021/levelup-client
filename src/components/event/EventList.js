@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { getEvents } from "../../managers/EventManager"
 import "./event.css"
 
 export const EventList = (props) => {
     const [ events, setEvents ] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         getEvents().then(data => setEvents(data))
     }, [])
@@ -14,6 +15,11 @@ export const EventList = (props) => {
     }, [])
 
     return (
+        <>
+        <button className="btn btn-2 btn-sep icon-create"
+            onClick={() => {
+                navigate({ pathname: "/events/new" })
+                }}>Host New Event</button>
         <article className="events">
             {
                 events.map(event => {
@@ -31,5 +37,6 @@ export const EventList = (props) => {
                 })
             }
         </article>
+        </>
     )
 }

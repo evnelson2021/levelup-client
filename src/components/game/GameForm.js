@@ -17,7 +17,8 @@ export const GameForm = () => {
         min_players: 0,
         max_players: 0,
         min_age: 0,
-        gameTypeId: 0
+        length: "",
+        type: 0
     })
 
     useEffect(() => {
@@ -57,11 +58,26 @@ export const GameForm = () => {
                         value={currentGame.min_age}
                         onChange={changeGameState}
                     />
-                    <label htmlFor="gameTypeId">Game Type: </label>
-                    <input type="text" name="gameTypeId" required autoFocus className="form-control"
-                        value={currentGame.gameTypeId}
+                    <label htmlFor="length">Length to Play (hours): </label>
+                    <input type="text" name="length" required autoFocus className="form-control"
+                        value={currentGame.length}
                         onChange={changeGameState}
                     />
+                    <label className="label">Game Type: </label>
+                    <select
+                            name="type"
+                            className="form-control"
+                            value={currentGame.type}
+                            onChange={(event) => {
+                                const copy = { ...currentGame }
+                                copy.type = parseInt(event.target.value)
+                                setCurrentGame(copy)
+                            }}>
+                            <option value="0">Please Choose Type</option>
+                            {gameTypes.map(type => ( 
+                                        <option key={`type--${type.id}`} value={type.id} name={type.label}>{type.label}</option>                         
+                                ))}
+                    </select>
                 </div>
             </fieldset>
 
@@ -78,7 +94,8 @@ export const GameForm = () => {
                         min_players: parseInt(currentGame.min_players),
                         max_players: parseInt(currentGame.max_players),
                         min_age: parseInt(currentGame.min_age),
-                        game_type: parseInt(currentGame.gameTypeId)
+                        type: parseInt(currentGame.type),
+                        length: currentGame.length
                     }
 
                     // Send POST request to your API
