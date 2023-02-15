@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getEvents } from "../../managers/EventManager"
+import { deleteEvent, getEvents } from "../../managers/EventManager"
 import "./event.css"
 
 export const EventList = (props) => {
@@ -13,6 +13,17 @@ export const EventList = (props) => {
     useEffect(() => {
         getEvents().then(data => setEvents(data))
     }, [])
+
+
+    const deleteButton = (id) => {
+        return <button onClick={() => {
+            deleteEvent(id)
+            .then(() => {
+                    getEvents().then(data => setEvents(data))
+                })
+            
+        }} className="btn btn-2 btn-sep icon-create">Delete</button>
+}
 
     return (
         <>
@@ -36,6 +47,7 @@ export const EventList = (props) => {
                                 onClick={() => {
                                     navigate({ pathname: `edit/${event.id}` })
                                     }}>Edit</button>
+                                    {deleteButton(event.id)}   
                         </div>
                         
                     </section>
