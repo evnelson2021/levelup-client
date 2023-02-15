@@ -31,7 +31,12 @@ export const EventList = (props) => {
                         <div className="event__time"> Time: {event.start_time} - {event.end_time}</div>
                         <div className="event__details">Details:  {event.details}</div>
                         <div className="event__organizer">{event.title} Organized by {event.organizing_gamer.full_name}</div>
-                        
+                        <div className="event__footer">
+                            <button className="btn btn-2 btn-sep icon-create"
+                                onClick={() => {
+                                    navigate({ pathname: `edit/${event.id}` })
+                                    }}>Edit</button>
+                        </div>
                         
                     </section>
                 })

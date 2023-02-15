@@ -17,7 +17,9 @@ export const UpdateGame = () => {
         max_players: 0,
         min_age: 0,
         length: "",
-        type: 0
+        type: {},
+        organizing_gamer: 0,
+        gameTypeId: 0
     })
 
     useEffect(() => {
@@ -70,13 +72,12 @@ export const UpdateGame = () => {
                     <select
                             name="type"
                             className="form-control"
-                            value={currentGame.type}
+                            value={currentGame.gameTypeId}
                             onChange={(event) => {
                                 const copy = { ...currentGame }
-                                copy.type = (event.target.value)
+                                copy.gameTypeId = (event.target.value)
                                 setCurrentGame(copy)
                             }}>
-                            <option value="0">Please Choose Type</option>
                             {gameTypes.map(type => ( 
                                         <option key={`type--${type.id}`} value={type.id} name={type.label}>{type.label}</option>                         
                                 ))}
@@ -95,12 +96,12 @@ export const UpdateGame = () => {
                         min_players: parseInt(currentGame.min_players),
                         max_players: parseInt(currentGame.max_players),
                         min_age: parseInt(currentGame.min_age),
-                        type: parseInt(currentGame.type),
+                        type: currentGame.gameTypeId,
                         length: currentGame.length
                     }
 
                     // Send POST request to your API
-                    updateGame(game)
+                    updateGame(game, gameId)
                         .then(() => navigate("/games"))
                 }}
                 className="btn btn-primary">Update</button>

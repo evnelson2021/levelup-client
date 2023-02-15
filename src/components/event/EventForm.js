@@ -43,7 +43,7 @@ export const EventForm = () => {
                         <select
                                 name="game"
                                 className="form-control"
-                                value={currentEvent.game}
+                                defaultValue={currentEvent.game}
                                 onChange={(event) => {
                                     const copy = { ...currentEvent }
                                     copy.game = parseInt(event.target.value)
@@ -71,7 +71,7 @@ export const EventForm = () => {
                     />
                     <label htmlFor="end_time">End: </label>
                     <input type="time" name="end_time" required autoFocus className="form-control"
-                        value={currentEvent.length}
+                        value={currentEvent.end_time}
                         onChange={changeEventState}
                     />
                     <label htmlFor="details">Details: </label>

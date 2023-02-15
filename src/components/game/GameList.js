@@ -8,7 +8,7 @@ export const GameList = (props) => {
         {id: 0,
         name: "",
         description: "",
-        game_type: {},
+        type: {},
         min_player: 0,
         max_player: 0,
         gamer: {}
@@ -23,7 +23,7 @@ export const GameList = (props) => {
         <>
         <button className="btn btn-2 btn-sep icon-create"
             onClick={() => {
-                navigate({ pathname: "/games/new" })
+                navigate({ pathname: "new" })
                 }}>Register New Game</button>
         
         <article className="games">
@@ -38,10 +38,12 @@ export const GameList = (props) => {
                         <div className="game__min_age">Minimum age is {game.min_age}</div>
                         <div className="game__creator">
                         Created by: {game.gamer.full_name}</div>
-                        <button className="btn btn-2 btn-sep icon-create"
-                            onClick={() => {
-                                navigate({ pathname: `/games/edit/${game.id}` })
-                                }}>Edit</button>
+                        <div className="game__footer">
+                            <button className="btn btn-2 btn-sep icon-create"
+                                onClick={() => {
+                                    navigate({ pathname: `edit/${game.id}` })
+                                    }}>Edit</button>
+                        </div>
                     </section>
                 })
             }
