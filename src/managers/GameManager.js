@@ -45,7 +45,6 @@ export const updateGame = (game, id) => {
         },
         body: JSON.stringify(game)
     })
-    .then(response => response.json())
 }
 
 export const deleteGame = (id) => {
