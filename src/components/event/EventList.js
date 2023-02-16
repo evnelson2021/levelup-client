@@ -18,7 +18,7 @@ export const EventList = (props) => {
                     getEvents().then(data => setEvents(data))
                 })
             
-        }} className="btn btn-2 btn-sep icon-create">Delete</button>
+        }} className="btn2 btn-2 btn-sep icon-create">Delete</button>
     }
 
     return (
@@ -54,7 +54,7 @@ export const EventList = (props) => {
                                         .then(() => {
                                             getEvents().then(data => setEvents(data))
                                         })
-                                    }}>Leave</button>
+                                    }} className = "btn2 btn-3 btn-sep icon-create">Leave</button>
                                 :
                                     <button
                                     onClick={() => {
@@ -62,7 +62,7 @@ export const EventList = (props) => {
                                         .then(() => {
                                             getEvents().then(data => setEvents(data))
                                         })
-                                    }}>Join</button>
+                                    }} className = "btn2 btn-2 btn-sep icon-create">Join</button>
                             } 
                         </div>
                     </section>

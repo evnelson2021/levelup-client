@@ -59,6 +59,26 @@ code {
 	transition: all 0.3s;
 }
 
+.btn2 {
+	border: none;
+	font-family: Menlo;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	padding: 10px 10px;
+	display: inline-block;
+	margin: 10px 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
 .btn:after {
 	content: '';
 	position: absolute;
@@ -82,7 +102,7 @@ code {
 
 /* Icon separator */
 .btn-sep {
-	padding: 25px 60px 25px 120px;
+	padding: 20px 20px 20px 20px;
 }
 
 .btn-sep:before {
