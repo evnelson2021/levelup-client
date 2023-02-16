@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { deleteEvent, getEvents } from "../../managers/EventManager"
+import { deleteEvent, getEvents, joinEvent, leaveEvent } from "../../managers/EventManager"
 import "./event.css"
 
 export const EventList = (props) => {
     const [ events, setEvents ] = useState([])
     const navigate = useNavigate()
-    useEffect(() => {
-        getEvents().then(data => setEvents(data))
-    }, [])
 
     useEffect(() => {
         getEvents().then(data => setEvents(data))
     }, [])
-
 
     const deleteButton = (id) => {
         return <button onClick={() => {
@@ -23,7 +19,7 @@ export const EventList = (props) => {
                 })
             
         }} className="btn btn-2 btn-sep icon-create">Delete</button>
-}
+    }
 
     return (
         <>
@@ -48,8 +44,27 @@ export const EventList = (props) => {
                                     navigate({ pathname: `edit/${event.id}` })
                                     }}>Edit</button>
                                     {deleteButton(event.id)}   
-                        </div>
                         
+                            {
+                                event.joined 
+                                ?
+                                    <button
+                                    onClick={() => {
+                                        leaveEvent(event.id)
+                                        .then(() => {
+                                            getEvents().then(data => setEvents(data))
+                                        })
+                                    }}>Leave</button>
+                                :
+                                    <button
+                                    onClick={() => {
+                                        joinEvent(event.id)
+                                        .then(() => {
+                                            getEvents().then(data => setEvents(data))
+                                        })
+                                    }}>Join</button>
+                            } 
+                        </div>
                     </section>
                 })
             }
